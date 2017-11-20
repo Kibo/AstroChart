@@ -111,6 +111,7 @@
         	// draw symbol						
 			var symbol = this.paper.getSymbol(point.name, point.x, point.y);
         	symbol.setAttribute('id', astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.ID_POINTS + "-" + point.name);
+        	symbol.setAttribute('class', astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.CLASS_DRAGGABLE);
         	wrapper.appendChild( symbol );
         	        	        	        
         	// draw point descriptions
@@ -276,6 +277,18 @@
 																											
 		 // this
         return context;				
+	};
+	
+	astrology.Transit.prototype.draggable = function( callback ){
+		 
+		var handler = new astrology.InputHandler( (function( event ){
+			var key = astrology.utils.getLastPart( event.elementId );
+			
+			console.log( key )
+			
+		}).bind(this) );
+		
+		handler.setTargets(  document.querySelectorAll("." + astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.CLASS_DRAGGABLE));			
 	};
 		
 }( window.astrology = window.astrology || {}));

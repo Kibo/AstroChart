@@ -326,5 +326,45 @@
 												
 		return result;		
 	};
+	
+	/**
+ 	* Is touch device
+ 	* @return {boolean}
+ 	*/
+	astrology.utils.isTouchDevice = function(){
+		return ('ontouchstart' in document.documentElement);	
+	};
+	
+	/**
+ 	* Split text and return the last part of it. 
+ 	* 
+ 	* @param {String} text
+ 	* @param {String} separator - text separator
+ 	* @return {String}
+ 	*/
+	astrology.utils.getLastPart = function( text, separator ){
+		var delimiter = separator || "-";		
+		return text.split( delimiter )[ text.split( delimiter ).length - 1 ];	
+	};
+	
+	
+	/**
+	 * Augment existing 'class' with a method from another
+	 * 
+	 * @param {Object} receivingClass
+	 * @param {Object} givingClass
+	 * @param {Array<String>} methodNames - ["trigger","bind","unbind"]
+	 */
+	astrology.utils.mixin = function(receivingClass, givingClass, methodNames){
+		    			    			    
+		for (var i=0; i < methodNames.length; i++) {
+			if( typeof givingClass.prototype[methodNames[i]]  != "function"){
+				throw new Error( "Class has not prototype method with name " + methodNames[i] );
+			}
+			
+			delete receivingClass.prototype[methodNames[i]];	    				    		
+			receivingClass.prototype[methodNames[i]] = givingClass.prototype[methodNames[i]];	
+		}	    		
+	};
 									
 }( window.astrology = window.astrology || {}));

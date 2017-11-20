@@ -61,6 +61,9 @@
 	// Background wrapper element ID
 	astrology.ID_BG = "bg";
 	
+	//a DOM class for draggable planets
+	astrology.CLASS_DRAGGABLE = "draggable";
+	
 	// Color of circles in charts
 	astrology.CIRCLE_COLOR = "#333";
 	

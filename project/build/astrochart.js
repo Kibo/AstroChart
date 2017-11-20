@@ -61,6 +61,9 @@
 	// Background wrapper element ID
 	astrology.ID_BG = "bg";
 	
+	//a DOM class for draggable planets
+	astrology.CLASS_DRAGGABLE = "draggable";
+	
 	// Color of circles in charts
 	astrology.CIRCLE_COLOR = "#333";
 	
@@ -2271,6 +2274,7 @@
         	// draw symbol						
 			var symbol = this.paper.getSymbol(point.name, point.x, point.y);
         	symbol.setAttribute('id', astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.ID_POINTS + "-" + point.name);
+        	symbol.setAttribute('class', astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.CLASS_DRAGGABLE);
         	wrapper.appendChild( symbol );
         	        	        	        
         	// draw point descriptions
@@ -2436,6 +2440,18 @@
 																											
 		 // this
         return context;				
+	};
+	
+	astrology.Transit.prototype.draggable = function( callback ){
+		 
+		var handler = new astrology.InputHandler( (function( event ){
+			var key = astrology.utils.getLastPart( event.elementId );
+			
+			console.log( key )
+			
+		}).bind(this) );
+		
+		handler.setTargets(  document.querySelectorAll("." + astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.CLASS_DRAGGABLE));			
 	};
 		
 }( window.astrology = window.astrology || {}));
@@ -3242,6 +3258,156 @@
 	}
 						 		
 }( window.astrology = window.astrology || {}));
+// ## Base InputHandler ###################################
+(function( astrology ) {
+		
+	var context;
+    
+	/**
+	 * Base Input Handler
+	 * 
+	 * @class
+	 * @public
+	 * @constructor 	 
+	 */
+	astrology.InputHandler = function( callBack ){  
+		
+		this.callback = callBack;
+		
+		this.elements = null;	
+    	this.moving = false;
+    	
+    	this.moveThreshold = 2;
+    	this.stopDomEvents = true;
+    	
+    	// TODO
+    	/*    	     	
+    	if( astrology.utils.isTouchDevice() ){
+    		astrology.utils.mixin(this, astrology.Touchhandler(), ["hello"]);
+    	}else{
+    		astrology.utils.mixin(this, astrology.MouseHandler(), ["hello"]);
+    	}
+    	*/    
+    	
+    	context = this;	    	    	    	    	    
+	};
+	
+	/**
+	 * 
+ 	 * @param {Object} eventTarget - DOM element
+	 */
+	astrology.InputHandler.prototype.setTargets = function( elements ){		
+		this.elements = elements;
+		elements.forEach( function(element){			
+			this.attachDomListeners( element );			
+		}, this);			
+	};
+	
+	/**
+	 * @param {EventTarget} element
+	 */
+	astrology.InputHandler.prototype.attachDomListeners = function( element ){
+		element.addEventListener("mousedown", (this.onDownDomEvent).bind(this), false);
+		element.addEventListener("mouseup", (this.onUpDomEvent).bind(this), false);
+		element.addEventListener("mousemove", this.onMoveDomEvent, false);
+		element.addEventListener("mouseout", (function(){console.log("mouse out")}).bind(this), false);						
+	};
+	
+	/**
+	 * @param {Object} e - DOM Event
+	 */
+	astrology.InputHandler.prototype.onDownDomEvent = function(e){
+		
+		// We must save this coordinates to support the moveThreshold							
+		this.lastMoveCoordinates = this.getInputCoordinates(e);
+		this.moving = true;
+	};
+	
+	/**
+	 * @param {Object} e - DOM Event
+	 */
+	astrology.InputHandler.prototype.onUpDomEvent = function(e){	
+		this.moving = false;		
+	};
+	
+	
+	/**
+	 * Listens to the "move" DOM events: mousemove and touchmove.
+	 * @param {Object} e - DOM move event
+	 */
+	astrology.InputHandler.prototype.onMoveDomEvent = function(e){				
+		if( context.moving != true){
+			return;
+		}
+										
+		var coords = context.getInputCoordinates(e);	   
+    	var deltaX = coords.posX - context.lastMoveCoordinates.posX;
+    	var deltaY = coords.posY - context.lastMoveCoordinates.posY;
+    	                      
+    	// Check threshold
+    	if (Math.sqrt(deltaX*deltaX + deltaY*deltaY) > context.moveThreshold) {
+    		
+    		if( typeof context.callback == 'function'){		
+				context.callback( {
+					"elementId":this.id, 
+					"posX":context.getInputCoordinates(e).posX, 
+					"posY":context.getInputCoordinates(e).posY
+					});
+				context.lastMoveCoordinates = coords;
+			}	    			        	        	    
+    	}
+    															
+	};
+		
+	/**
+ 	* Input coordinates
+ 	* @param {Object} e - DOM event
+ 	* @returns {Object}
+ 	*/
+	astrology.InputHandler.prototype.getInputCoordinates = function(e){						
+		var coords = e.targetTouches ? e.targetTouches[0] : e;
+						
+		return {
+			posX: coords.pageX,
+			posY: coords.pageY
+		};		
+	};
+			
+}( window.astrology = window.astrology || {}));
+
+// ## MouseInputHander ###################################
+(function( astrology ) {
+		
+	var context;
+    
+	/**
+	 * Mouse input hander
+	 * 
+	 * @class
+	 * @public
+	 * @constructor 	 
+	 */
+	astrology.MouseInputHandler = function( ){};
+	
+}( window.astrology = window.astrology || {}));
+
+// ## TouchInputHander ###################################
+(function( astrology ) {
+		
+	var context;
+    
+	/**
+	 * Touch input hander
+	 * 
+	 * @class
+	 * @public
+	 * @constructor 	 
+	 */
+	astrology.TouchInputHandler = function( ){};
+	
+	
+	
+}( window.astrology = window.astrology || {}));
 // ## UTILS #############################
 (function( astrology ) {
 	
@@ -3569,6 +3735,46 @@
 		} 
 												
 		return result;		
+	};
+	
+	/**
+ 	* Is touch device
+ 	* @return {boolean}
+ 	*/
+	astrology.utils.isTouchDevice = function(){
+		return ('ontouchstart' in document.documentElement);	
+	};
+	
+	/**
+ 	* Split text and return the last part of it. 
+ 	* 
+ 	* @param {String} text
+ 	* @param {String} separator - text separator
+ 	* @return {String}
+ 	*/
+	astrology.utils.getLastPart = function( text, separator ){
+		var delimiter = separator || "-";		
+		return text.split( delimiter )[ text.split( delimiter ).length - 1 ];	
+	};
+	
+	
+	/**
+	 * Augment existing 'class' with a method from another
+	 * 
+	 * @param {Object} receivingClass
+	 * @param {Object} givingClass
+	 * @param {Array<String>} methodNames - ["trigger","bind","unbind"]
+	 */
+	astrology.utils.mixin = function(receivingClass, givingClass, methodNames){
+		    			    			    
+		for (var i=0; i < methodNames.length; i++) {
+			if( typeof givingClass.prototype[methodNames[i]]  != "function"){
+				throw new Error( "Class has not prototype method with name " + methodNames[i] );
+			}
+			
+			delete receivingClass.prototype[methodNames[i]];	    				    		
+			receivingClass.prototype[methodNames[i]] = givingClass.prototype[methodNames[i]];	
+		}	    		
 	};
 									
 }( window.astrology = window.astrology || {}));

@@ -16,7 +16,10 @@ module.exports = function( grunt ) {
 					'project/src/aspect.js',
 					'project/src/zodiac.js',
 					'project/src/animation/timer.js',
-					'project/src/animation/animator.js',  										
+					'project/src/animation/animator.js',					
+					'project/src/input/input.js',
+					'project/src/input/mouseHandler.js',
+					'project/src/input/touchHandler.js',					  									
 					'project/src/utils.js'],
 				dest : 'project/build/<%= pkg.name %>.js' 
 			}
@@ -51,7 +54,8 @@ module.exports = function( grunt ) {
   			scripts: {
     			files: [
     				 "project/src/*.js",
-    				 "project/src/animation/*.js",          			 
+    				 "project/src/animation/*.js",
+    				 "project/src/input/*.js",          			 
     			],
     			tasks: [ 'dev' ],
     			options: {
