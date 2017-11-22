@@ -20,6 +20,21 @@
 		return {x:xPos, y:yPos};
 	};
 	
+	/**
+	 * @param {int} cx - center x 
+	 * @param {int} cy - center y
+	 * @param {int} posX - the point X position
+	 * @param {int} posY - the point Y position
+	 * 
+	 * @return {ing} angle in degrees 
+	 */
+	astrology.utils.getPointAngle = function( cx, cy, posX, posY ){		
+		var dy = posY - cy;
+  		var dx = posX - cx;  		
+  		return astrology.SHIFT_IN_DEGREES - astrology.utils.radiansToDegree( Math.atan2(dy, dx) );
+	};
+	
+	
 	astrology.utils.degreeToRadians = function( degree ){
 		return degrees * Math.PI / 180;
 	};

@@ -282,13 +282,27 @@
 	astrology.Transit.prototype.draggable = function( callback ){
 		 
 		var handler = new astrology.InputHandler( (function( event ){
-			var key = astrology.utils.getLastPart( event.elementId );
 			
-			console.log( key )
+			/*
+			var key = astrology.utils.getLastPart( event.target.id );									
+			var tmpPlanetsData = Object.assign({}, this.data.planets);			
+			tmpPlanetsData[key] = [astrology.utils.getPointAngle( this.cx, this.cy, event.posX, event.posY )];
+			*/
 			
+			var matrix = event.target.getAttribute("transform").slice(7,-1).split(' ');
+			for(var i=0; i < matrix.length; i++) {
+        		matrix[i] = parseFloat( matrix[i] );
+			}
+			
+			matrix[4] += event.deltaX;
+			matrix[5] += event.deltaY;
+
+			//console.log(matrix);			
+			event.target.setAttribute("transform", "matrix(" + matrix.join(" ") + ")" );
+										
 		}).bind(this) );
 		
-		handler.setTargets(  document.querySelectorAll("." + astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.CLASS_DRAGGABLE));			
+	  handler.setTargets(  document.querySelectorAll("." + astrology.ID_CHART + "-" + astrology.ID_TRANSIT + "-" + astrology.CLASS_DRAGGABLE));
 	};
 		
 }( window.astrology = window.astrology || {}));
