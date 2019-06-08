@@ -1,64 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="50"
-   height="50"
-   id="svg34864"
-   sodipodi:version="0.32"
-   inkscape:version="0.91 r13725"
-   version="1.0"
-   sodipodi:docname="Saturn.svg">
-  <defs
-     id="defs34866" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     gridtolerance="10000"
-     guidetolerance="10"
-     objecttolerance="10"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="10.059259"
-     inkscape:cx="7.4631808"
-     inkscape:cy="18.015464"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     inkscape:window-width="1280"
-     inkscape:window-height="975"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
-     showgrid="false"
-     inkscape:window-maximized="1" />
-  <metadata
-     id="metadata34869">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-348.7552,-478.0905)">
-    <path
-       id="path6574"
-       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.63636339;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 378.82068,511.85418 c -0.54546,0.54545 -1.09092,1.09091 -1.63637,1.09091 -0.54545,0 -1.63637,-0.54546 -1.63637,-1.63637 0,-1.0909 0.54547,-2.18181 1.63637,-3.27273 1.09091,-1.0909 2.18182,-3.27272 2.18182,-5.45454 0,-2.18182 -1.09091,-4.36363 -3.27272,-4.36363 -2.06357,0 -3.8182,1.09091 -4.9091,3.27273 m -2.66883,-6.13638 6.54546,0 m -3.87663,-2.5909 0,15.81818"
-       inkscape:connector-curvature="0" />
-  </g>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="55.137px" height="89.52px" viewBox="0 0 55.137 89.52" style="enable-background:new 0 0 55.137 89.52;"
+	 xml:space="preserve">
+<path style="fill-rule:evenodd;clip-rule:evenodd;" d="M52.395,54.334l-0.01,0.006C48.308,45.929,39.867,40.029,30,39.563V39.5H20
+	V22h10V12H20V0H10v12H0v10h10v60h10V49.5h10v0.126c6.1,0.473,11.252,4.279,13.612,9.607l-0.031,0.018
+	c0.39,0.846,0.688,1.712,0.923,2.587c0.058,0.229,0.123,0.457,0.17,0.69c0.015,0.065,0.025,0.132,0.039,0.197
+	C44.898,63.705,45,64.715,45,65.75c0,0.429-0.088,0.831-0.12,1.25h0.157c-0.31,5.344-3.233,10.418-8.272,13.229
+	c-0.374,0.21-0.771,0.329-1.153,0.506l4.9,8.785c0.375-0.187,0.756-0.352,1.125-0.558C53.966,82.084,58.598,66.805,52.395,54.334z"
+	/>
 </svg>
