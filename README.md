@@ -1,3 +1,5 @@
+> Project moved to [AstroDraw/AstroChart](https://github.com/AstroDraw/AstroChart)
+
 # AstroChart
 A free and open-source JavaScript library for generating SVG charts to display planets in astrology. It does not calculate any positions of the planets in Universe.
 
